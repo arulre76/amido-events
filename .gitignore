@@ -1,0 +1,5 @@
+#ignore build and setup files
+.classpath
+.project
+.settings
+/target/

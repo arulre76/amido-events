@@ -4,7 +4,6 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>events-app</artifactId>
-	<packaging>war</packaging>
 	<name>Events Application</name>
 	<description>Application which displays events information</description>
 	<version>1.0</version>

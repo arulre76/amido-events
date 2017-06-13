@@ -1,6 +1,7 @@
 package com.eventful;
 
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
 import com.evdb.javaapi.data.SearchResult;
-import com.weatherlibrary.datamodel.Forecast;
-import com.weatherlibrary.datamodel.Location;
 
 @Controller
 public class EventController {
@@ -17,10 +16,14 @@ public class EventController {
 	private static String EVENT_API_URL="http://api.eventful.com/rest/events/search?app_key=h8VhXx6DqM8DXfsj&keywords=music&date=future&location=";
 	private static String APIXU_WEATHER_FORECAST_API_URL="http://api.apixu.com/v1/forecast.json?key=b22eb4b9958f417694e183601171106&q=";
 
-	@RequestMapping("/events/{location}")
+	@RequestMapping(value = {"/events", "/events/{location}"})
 	public String welcome(Map<String, Object> model, @PathVariable(value="location", required=false) String location) {
 
-		model.put("eventResult", searchLondonEvents(location));
+		if(location != null) {
+			model.put("eventResult", searchLondonEvents(location));
+		} else {
+			model.put("eventResult", searchLondonEvents("london"));
+		}
 		return "events";
 	}
 
